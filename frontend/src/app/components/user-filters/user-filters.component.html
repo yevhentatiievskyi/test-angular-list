@@ -1,0 +1,21 @@
+<div class="wrapper">
+  <div class="inputs">
+    <mat-form-field>
+      <mat-label>Role</mat-label>
+      <mat-select [(value)]="role" (selectionChange)="onChange()">
+        <mat-option [value]="''">All</mat-option>
+        <mat-option *ngFor="let option of data | async" [value]="option._id">{{option.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Search</mat-label>
+      <input [(ngModel)]="search" (input)="onChange()" matInput>
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+  <div class="action">
+    <button mat-raised-button color="primary" (click)="onCreate()">Add new</button>
+  </div>
+
+</div>
+

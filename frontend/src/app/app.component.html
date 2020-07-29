@@ -1,0 +1,11 @@
+<ng-template #template let-row="$implicit">
+  <button mat-raised-button color="primary" class="">
+    <mat-icon>edit</mat-icon>
+  </button>
+  <button mat-raised-button color="warn" (click)="onDelete(row._id)">
+    <mat-icon>delete</mat-icon>
+  </button>
+</ng-template>
+<app-user-filters [filter]="dataSource.filter"></app-user-filters>
+<app-data-table *ngIf="dataSource" [dataSource]="dataSource" [actionsTemplate]="template">
+</app-data-table>

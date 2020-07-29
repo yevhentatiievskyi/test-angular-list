@@ -1,0 +1,34 @@
+<h1 mat-dialog-title>{{isNew ? 'Create' : 'Edit'}}</h1>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <div mat-dialog-content class="form-wrapper">
+    <mat-form-field>
+      <mat-label>Firstname</mat-label>
+      <input formControlName="firstname" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Lastname</mat-label>
+      <input formControlName="lastname" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input formControlName="email" matInput>
+      <mat-error *ngIf="userForm.controls?.email?.errors?.pattern">
+        Email is <strong>invalid</strong>
+      </mat-error>
+      <mat-error *ngIf="userForm.controls?.email?.errors?.email">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Role</mat-label>
+      <mat-select formControlName="role">
+        <mat-option *ngFor="let option of roles | async" [value]="option._id">{{option.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="warn" type="button" (click)="cancel()">Cancel</button>
+    <button mat-raised-button color="primary" type="submit">Save</button>
+  </div>
+</form>
+
