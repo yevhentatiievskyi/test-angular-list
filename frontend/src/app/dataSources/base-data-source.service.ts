@@ -11,8 +11,6 @@ import {DynamicFilter} from '../shared/helpers/dynamic-filter';
   providedIn: 'root'
 })
 export abstract class BaseDataSourceService<T> extends DataSource<T>{
-  data: T[] = [];
-  paginator: MatPaginator;
   filter: DynamicFilter = new DynamicFilter();
   abstract columns: string[];
   private changesSubscription: Subscription;
@@ -29,19 +27,14 @@ export abstract class BaseDataSourceService<T> extends DataSource<T>{
   connect(): Observable<T[]> {
     const changes = [
       this.refetchSubject.asObservable(),
-      this.paginator.page,
       this.filter.changes
     ];
 
     this.changesSubscription = merge(...changes).subscribe(() => {
-      const { pageSize, pageIndex } = this.paginator;
-      this.service.fetch({filter: this.filter.value, pageIndex, pageSize });
+      this.service.fetch({filter: this.filter.value });
     });
 
-    return this.service.data.pipe((map((data) => {
-      this.data = data.map((i: T) => dot(i));
-      return this.data;
-    })));
+    return this.service.data.pipe((map((data) => data.map((i: T) => dot(i)))));
   }
 
   disconnect(): void {

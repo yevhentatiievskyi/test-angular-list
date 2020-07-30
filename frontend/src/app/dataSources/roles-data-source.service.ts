@@ -14,17 +14,12 @@ export class RolesDataSourceService {
     return this.subject.asObservable();
   }
 
-  byId(id: string): any {
-  }
-
-  delete(id: string): any {
-  }
-
   fetch(): any {
     this.client.get<any[]>('/API/roles')
       .subscribe((data: any[]) => this.subject.next(data));
   }
 
-  update(id: string, data: any): any {
+  availableRoles(id: string = 'new'): Observable<any[]> {
+    return this.client.get<any[]>(`/API/available_roles/${id}`);
   }
 }

@@ -26,7 +26,7 @@ export class UserFiltersComponent implements OnInit {
   }
 
   onCreate(): void {
-    const dialogRef = this.dialog.open(EditUserComponent);
+    const dialogRef = this.dialog.open(EditUserComponent, { width: '500px'});
   }
 
   ngOnInit(): void {

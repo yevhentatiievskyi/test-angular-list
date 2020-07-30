@@ -19,6 +19,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { EditUserComponent } from './components/dialogs/edit-user/edit-user.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatInputModule,
     MatDialogModule,
     MatFormFieldModule,
+    MatSnackBarModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule

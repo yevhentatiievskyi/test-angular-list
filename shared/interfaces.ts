@@ -2,6 +2,7 @@ import { Document, Model } from 'mongoose';
 
 export interface IRole extends Document {
   name: string;
+  users?: any[]
 }
 
 export interface IBasicUser {

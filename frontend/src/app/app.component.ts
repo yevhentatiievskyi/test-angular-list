@@ -4,6 +4,7 @@ import {DynamicFilter} from './shared/helpers/dynamic-filter';
 import {UserServiceService} from './services/user-service.service';
 import {EditUserComponent} from './components/dialogs/edit-user/edit-user.component';
 import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,12 @@ export class AppComponent implements OnInit {
   dataSource: UsersDataSourceService;
   filter: DynamicFilter = new DynamicFilter();
 
-  constructor(dataSource: UsersDataSourceService, private userService: UserServiceService, public dialog: MatDialog) {
+  constructor(
+    dataSource: UsersDataSourceService,
+    private userService: UserServiceService,
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
+  ) {
     this.dataSource = dataSource;
   }
 
@@ -25,15 +31,17 @@ export class AppComponent implements OnInit {
     try{
       await this.userService.delete(id).toPromise();
       this.dataSource.refetch();
+      this.snackBar.open('Item deleted', 'success', { duration: 2000});
     } catch (e){
-      console.log(e, '########');
+      this.snackBar.open(e.message, 'error', { duration: 2000});
     }
   }
 
-  onEdit(): void{
+  onEdit(data: any): void{
+    data = { ...data, role: data['role._id'] };
     const dialogRef = this.dialog.open(EditUserComponent, {
-      width: '250px',
-      data: {}
+      width: '500px',
+      data
     });
   }
 }

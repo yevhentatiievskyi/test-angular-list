@@ -1,0 +1,26 @@
+{
+  "name": "test-angular-list",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "npm i -g @angular/cli && (cd frontend && npm i && npm i --only=dev && npm run build); (cd backend && npm i && npm i --only=dev && npm run build);",
+    "start": "cd backend && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yevhentatiievskyi/test-angular-list.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yevhentatiievskyi/test-angular-list/issues"
+  },
+  "homepage": "https://github.com/yevhentatiievskyi/test-angular-list#readme",
+  "dependencies": {
+    "@types/mongoose": "^5.7.34",
+    "mongoose": "^5.9.26",
+    "tslib": "^2.0.0"
+  }
+}

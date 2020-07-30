@@ -4,9 +4,21 @@
     <mat-form-field>
       <mat-label>Firstname</mat-label>
       <input formControlName="firstname" matInput>
+      <mat-error *ngIf="userForm.controls?.firstname?.errors?.required">
+        Field is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="userForm.controls?.firstname?.errors?.pattern">
+        Firstname is <strong>invalid</strong>
+      </mat-error>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Lastname</mat-label>
+      <mat-error *ngIf="userForm.controls?.lastname?.errors?.required">
+        Field is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="userForm.controls?.lastname?.errors?.pattern">
+        Lastname is <strong>invalid</strong>
+      </mat-error>
       <input formControlName="lastname" matInput>
     </mat-form-field>
     <mat-form-field>
@@ -15,8 +27,11 @@
       <mat-error *ngIf="userForm.controls?.email?.errors?.pattern">
         Email is <strong>invalid</strong>
       </mat-error>
-      <mat-error *ngIf="userForm.controls?.email?.errors?.email">
-        Email is <strong>required</strong>
+      <mat-error *ngIf="userForm.controls?.email?.errors?.required">
+        Field is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="userForm.controls?.email?.errors?.exists">
+        Email is <strong>existed</strong>
       </mat-error>
     </mat-form-field>
     <mat-form-field>
@@ -24,6 +39,9 @@
       <mat-select formControlName="role">
         <mat-option *ngFor="let option of roles | async" [value]="option._id">{{option.name}}</mat-option>
       </mat-select>
+      <mat-error *ngIf="userForm.controls?.role?.errors?.required">
+        Field is <strong>required</strong>
+      </mat-error>
     </mat-form-field>
   </div>
   <div mat-dialog-actions>

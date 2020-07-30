@@ -12,11 +12,12 @@ export class UserServiceService implements BaseAPIService<IUserWithRole> {
 
   constructor(private client: HttpClient) { }
 
-  get data(): Observable<IUserWithRole[]>{
-    return this.subject.asObservable();
+  create(newItem: any): Observable<any> {
+    return this.client.post('/API/users', newItem);
   }
 
-  byId(id: string): any {
+  get data(): Observable<IUserWithRole[]>{
+    return this.subject.asObservable();
   }
 
   delete(id: string): Observable<any> {
@@ -24,8 +25,8 @@ export class UserServiceService implements BaseAPIService<IUserWithRole> {
   }
 
   fetch(options: any): any {
-    const { pageSize = 100, pageIndex = 0, filter = {} } = options;
-    let params = new HttpParams().set('limit', pageSize).set('offset', `${pageSize * pageIndex}`);
+    const { filter = {} } = options;
+    let params = new HttpParams();
     params = Object.entries(filter).reduce((acc, [ key, value]) => {
       return value ? acc.set(key, `${value}`) : acc;
     }, params);
@@ -34,5 +35,10 @@ export class UserServiceService implements BaseAPIService<IUserWithRole> {
   }
 
   update(id: string, data: any): any {
+    return this.client.patch(`/API/users/${id}`, data);
+  }
+
+  checkEmail(email: string): Observable<any>{
+    return this.client.get(`/API/users/check_email/${email}`);
   }
 }

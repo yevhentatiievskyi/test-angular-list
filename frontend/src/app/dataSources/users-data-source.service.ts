@@ -10,7 +10,13 @@ import {UserServiceService} from '../services/user-service.service';
 export class UsersDataSourceService extends BaseDataSourceService<IUserWithRole> {
   data: IUserWithRole[] = [];
   paginator: MatPaginator;
-  columns: string[] = ['firstname', 'lastname', 'email', 'role.name', 'actions'];
+  columns: string[] = [
+    'firstname',
+    'lastname',
+    'email',
+    'role.name',
+    'actions'
+  ];
 
   constructor(service: UserServiceService) {
     super(service);

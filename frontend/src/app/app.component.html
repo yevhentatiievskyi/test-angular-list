@@ -1,5 +1,5 @@
 <ng-template #template let-row="$implicit">
-  <button mat-raised-button color="primary" class="">
+  <button mat-raised-button color="primary" (click)="onEdit(row)">
     <mat-icon>edit</mat-icon>
   </button>
   <button mat-raised-button color="warn" (click)="onDelete(row._id)">

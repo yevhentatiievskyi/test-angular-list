@@ -1,6 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import {AfterViewInit, Component, Input, TemplateRef, ViewChild} from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import {BaseDataSourceService} from '../../../dataSources/base-data-source.service';
 import {DynamicFilter} from '../../helpers/dynamic-filter';
@@ -11,15 +9,12 @@ import {DynamicFilter} from '../../helpers/dynamic-filter';
   styleUrls: ['./data-table.component.scss']
 })
 export class DataTableComponent implements AfterViewInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<any>;
   @Input() dataSource: BaseDataSourceService<any>;
   @Input() actionsTemplate: TemplateRef<any>;
   @Input() filter: DynamicFilter;
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+  ngAfterViewInit(): void {
     this.table.dataSource = this.dataSource;
   }
 }
